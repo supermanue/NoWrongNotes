@@ -1,0 +1,22 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  CI-CD:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Gradle setup
+        run: gradle wrapper
+      - name: Build & Deploy
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region us-east-2
+          ./gradlew build
+          aws lambda update-function-code --function-name pirate-translator --zip-file fileb://build/libs/pirate-translator.jar
