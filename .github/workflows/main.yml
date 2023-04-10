@@ -22,10 +22,8 @@ jobs:
           ./gradlew shadowJar
           echo "current"
           ls
-          echo "root"
-          ls fileb://
           echo "build"
-          ls fileb://build
+          ls build
           echo "libs"
-          ls fileb://build/libs
-          aws lambda update-function-code --function-name pirate-translator --zip-file fileb://build/libs/app-all.jar
+          ls build/libs
+          aws lambda update-function-code --function-name pirate-translator --zip-file build/libs/app-all.jar
