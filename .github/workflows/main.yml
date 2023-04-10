@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   CI-CD:
@@ -19,4 +19,5 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region us-east-2
           ./gradlew build
+          ./gradlew shadowJar
           aws lambda update-function-code --function-name pirate-translator --zip-file fileb://build/libs/pirate-translator.jar
