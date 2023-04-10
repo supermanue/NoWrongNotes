@@ -20,4 +20,12 @@ jobs:
           aws configure set default.region us-east-2
           ./gradlew build
           ./gradlew shadowJar
+          echo "current"
+          ls
+          echo "root"
+          ls fileb://
+          echo "build"
+          ls fileb://build
+          echo "libs"
+          ls fileb://build/libs
           aws lambda update-function-code --function-name pirate-translator --zip-file fileb://build/libs/app-all.jar
