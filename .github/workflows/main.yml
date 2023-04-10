@@ -10,7 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Gradle setup
         run: gradle wrapper
       - name: Build & Deploy
@@ -20,10 +19,4 @@ jobs:
           aws configure set default.region us-east-2
           ./gradlew build
           ./gradlew shadowJar
-          echo "current"
-          ls
-          echo "build"
-          ls build
-          echo "libs"
-          ls app/build/libs
           aws lambda update-function-code --function-name pirate-translator --zip-file fileb://app/build/libs/app-all.jar
