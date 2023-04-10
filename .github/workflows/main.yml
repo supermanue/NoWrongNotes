@@ -25,5 +25,5 @@ jobs:
           echo "build"
           ls build
           echo "libs"
-          ls build/libs
-          aws lambda update-function-code --function-name pirate-translator --zip-file build/libs/app-all.jar
+          ls app/build/libs
+          aws lambda update-function-code --function-name pirate-translator --zip-file app/build/libs/app-all.jar
